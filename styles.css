@@ -1,17 +1,11 @@
-/* ================= GENERAL TERMINAL THEME ================= */
+/* === Terminal Theme === */
 body {
+  background-color: #000;
+  color: #00FF00;
+  font-family: 'Courier New', Courier, monospace;
   margin: 0;
   padding: 20px;
-  font-family: 'Courier New', Courier, monospace;
-  background: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSjVfkfU31y-FosQKHYURAxpLndDFOhJBfI6A&s') repeat;
-  background-size: cover;
-  animation: matrix-scroll 20s linear infinite;
-  color: #00FF00;
-}
-
-@keyframes matrix-scroll {
-  from { background-position: 0 0; }
-  to { background-position: 0 100%; }
+  overflow-x: hidden;
 }
 
 .terminal {
@@ -19,9 +13,6 @@ body {
   padding: 20px;
   max-width: 800px;
   margin: auto;
-  background-color: rgba(0, 0, 0, 0.85);
-  border-radius: 15px;
-  box-shadow: 0 0 20px #00ff00;
 }
 
 .header {
@@ -37,16 +28,15 @@ body {
   color: #FFF000;
 }
 
-/* ================= LINK STYLING ================= */
 a {
   color: #FF4500;
   text-decoration: none;
   font-weight: bold;
   cursor: pointer;
-  transition: color 0.3s, text-decoration 0.3s;
   background-color: rgba(255, 69, 0, 0.1);
   padding: 2px 4px;
   border-radius: 4px;
+  transition: color 0.3s, text-decoration 0.3s;
 }
 
 a:hover {
@@ -54,129 +44,140 @@ a:hover {
   text-decoration: underline;
 }
 
-/* ================= TYPING TEXT EFFECT ================= */
-#typing-text {
-  font-size: 1.5rem;
-  font-weight: bold;
-  color: #00ff00;
-  text-shadow: 0 0 5px #00ff00;
-}
-
-.cursor {
-  display: inline-block;
-  color: #00ff00;
-  animation: blink 1s step-start infinite;
-}
-
-@keyframes blink {
-  50% { opacity: 0; }
-}
-
-/* ================= COMMAND INPUT ================= */
+/* === Typing Command Input === */
 .command-area {
   display: flex;
   align-items: center;
-  margin-top: 10px;
+  margin-top: 15px;
 }
 
-.command-area input {
+.prompt {
+  margin-right: 5px;
+  color: #0f0;
+}
+
+#commandInput {
   background-color: #000;
   color: #00FF00;
-  border: 1px solid #00FF00;
-  padding: 5px;
-  width: 100%;
-  font-family: 'Courier New', Courier, monospace;
-  font-size: 16px;
+  border: none;
   outline: none;
-  border-radius: 8px;
-  transition: box-shadow 0.3s ease-in-out;
+  font-family: inherit;
+  font-size: 16px;
+  width: 100%;
+  animation: glowInput 0.2s ease-out;
 }
 
-.command-area input:focus {
-  box-shadow: 0 0 10px #00FF00;
-  animation: glow 0.6s ease-in-out;
+@keyframes glowInput {
+  0% {
+    text-shadow: 0 0 5px #0f0;
+  }
+  100% {
+    text-shadow: none;
+  }
 }
 
-@keyframes glow {
-  0% { box-shadow: 0 0 5px #00ff00; }
-  50% { box-shadow: 0 0 20px #00ff00; }
-  100% { box-shadow: 0 0 5px #00ff00; }
-}
-
-/* ================= REVIEW FORM ================= */
+/* === Review Modal Popup === */
 #reviewFormContainer {
-  margin-top: 20px;
-  padding: 20px;
-  background-color: #111;
+  display: none;
+  position: fixed;
+  z-index: 999;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.9);
+  backdrop-filter: blur(4px);
+  justify-content: center;
+  align-items: center;
+}
+
+#reviewFormContainer.active {
+  display: flex;
+}
+
+/* Matrix Animated Background inside Popup */
+#reviewForm {
+  position: relative;
+  width: 90%;
+  max-width: 400px;
+  padding: 25px;
   border: 2px solid #00FF00;
   border-radius: 15px;
-  box-shadow: 0 0 15px #00FF00;
-  max-width: 500px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-form {
-  margin-top: 20px;
-}
-
-label {
   color: #00FF00;
-  font-weight: bold;
+  background: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSjVfkfU31y-FosQKHYURAxpLndDFOhJBfI6A&s') repeat;
+  background-size: cover;
+  box-shadow: 0 0 20px #00FF00;
+  animation: scrollMatrix 30s linear infinite;
+  font-size: 14px;
 }
 
-input[type="text"],
-input[type="email"],
-textarea {
+@keyframes scrollMatrix {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 0 100%;
+  }
+}
+
+#reviewForm label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+  color: #00FF00;
+}
+
+#reviewForm input[type="text"],
+#reviewForm input[type="email"],
+#reviewForm textarea {
   width: 100%;
   padding: 10px;
-  background-color: #000;
+  background-color: rgba(0, 0, 0, 0.7);
   color: #00FF00;
-  border: 2px solid #00FF00;
-  border-radius: 10px;
-  outline: none;
+  border: 1px solid #00FF00;
+  border-radius: 8px;
   margin-bottom: 15px;
-  font-size: 16px;
-  box-sizing: border-box;
+  font-size: 14px;
   transition: box-shadow 0.3s;
 }
 
-input[type="text"]:focus,
-input[type="email"]:focus,
-textarea:focus {
-  box-shadow: 0 0 10px #00FF00;
+#reviewForm input[type="text"]:focus,
+#reviewForm textarea:focus {
+  box-shadow: 0 0 8px #00FF00;
 }
 
-input[type="radio"] {
+#reviewForm input[type="radio"] {
   margin-right: 5px;
 }
 
-button {
-  padding: 10px 20px;
+#reviewForm button {
   background-color: #00FF00;
   color: #000;
+  padding: 8px 20px;
   font-weight: bold;
   border: none;
-  border-radius: 10px;
+  border-radius: 8px;
   cursor: pointer;
   transition: background-color 0.3s;
 }
 
-button:hover {
+#reviewForm button:hover {
   background-color: #0f0;
-  color: #000;
 }
 
-/* ================= LOADING POPUP ================= */
+/* === Loading Popup === */
 #loadingPopup {
+  display: none;
   position: fixed;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
+  z-index: 1001;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
   background-color: rgba(0, 0, 0, 0.9);
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 1001;
 }
 
 .glitch-text {
@@ -194,4 +195,23 @@ button:hover {
   60% { text-shadow: -2px 0 red, 2px 0 cyan; }
   80% { text-shadow: 2px 0 red, -2px 0 cyan; }
   100% { text-shadow: -2px 0 red, 2px 0 cyan; }
+}
+
+/* === Typing Animation === */
+.typing-container {
+  text-align: center;
+  margin-top: 100px;
+  font-size: 24px;
+  color: #00FF00;
+}
+
+.cursor {
+  display: inline-block;
+  animation: blink 0.7s infinite;
+}
+
+@keyframes blink {
+  0% { opacity: 1; }
+  50% { opacity: 0; }
+  100% { opacity: 1; }
 }
