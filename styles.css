@@ -27,14 +27,21 @@ body {
   color: #FFF000;
 }
 
-/* Link Styling */
+/* Improved Link Styling */
 a {
-  color: red;
-  text-decoration: none; /* Optional: remove underline */
+  color: #FF4500; /* Brighter red-orange */
+  text-decoration: none;
+  font-weight: bold;
+  cursor: pointer;
+  transition: color 0.3s, text-decoration 0.3s;
+  background-color: rgba(255, 69, 0, 0.1); /* subtle terminal-style glow */
+  padding: 2px 4px;
+  border-radius: 4px;
 }
 
 a:hover {
-  color: #FF5555; /* Optional: brighter red on hover */
+  color: #FF6347; /* Tomato red on hover */
+  text-decoration: underline;
 }
 
 /* Form Styling */
