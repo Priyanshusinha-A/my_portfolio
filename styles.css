@@ -27,6 +27,16 @@ body {
   color: #FFF000;
 }
 
+/* Link Styling */
+a {
+  color: red;
+  text-decoration: none; /* Optional: remove underline */
+}
+
+a:hover {
+  color: #FF5555; /* Optional: brighter red on hover */
+}
+
 /* Form Styling */
 form {
   margin-top: 20px;
