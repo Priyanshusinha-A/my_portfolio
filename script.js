@@ -29,7 +29,7 @@ document.addEventListener('DOMContentLoaded', function () {
   typeEffect();
 
   const commands = {
-      about: `
+ about: `
 > Hey there! I'm <span class="highlight">Priyanshu Kumar Sinha</span>, a driven and enthusiastic Computer Science undergraduate at <span class="highlight">Black Diamond College of Engineering and Technology</span>. I'm not just learning tech — I'm <em>living</em> it.<br><br>
 
 > My journey in technology is fueled by a relentless curiosity and a genuine passion for <span class="highlight">Cybersecurity</span> and <span class="highlight">Full Stack Web Development</span>. From designing clean, user-focused interfaces to diving deep into system vulnerabilities, I thrive on turning ideas into impactful digital solutions.<br><br>
@@ -66,7 +66,7 @@ GitHub: <a href="https://github.com/Priyanshusinha-A/" target="_blank">GitHub</a
       reviewModal.classList.add('active');
       addToTerminal("> Review popup opened. Fill out the form or type 'clear' to close.");
     },
-    
+
     clear: () => {
       output.innerHTML = "";
       reviewModal.classList.remove('active');
@@ -92,14 +92,15 @@ GitHub: <a href="https://github.com/Priyanshusinha-A/" target="_blank">GitHub</a
     }
   });
 
-  // Handle popup close
+  // Close modal when clicking "X"
   closeModal.addEventListener('click', () => {
-    reviewModal.style.display = 'none';
+    reviewModal.classList.remove('active');
   });
 
+  // Close modal when pressing Escape
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') {
-      reviewModal.style.display = 'none';
+      reviewModal.classList.remove('active');
     }
   });
 
@@ -111,6 +112,7 @@ GitHub: <a href="https://github.com/Priyanshusinha-A/" target="_blank">GitHub</a
     output.scrollTop = output.scrollHeight;
   }
 
+  // Form submission
   document.getElementById('reviewForm').addEventListener('submit', function (e) {
     e.preventDefault();
 
@@ -131,16 +133,16 @@ GitHub: <a href="https://github.com/Priyanshusinha-A/" target="_blank">GitHub</a
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ name, experience, comment, gmail })
     })
-      .then(res => res.json())
-      .then(() => {
-        addToTerminal(`> Thanks ${name}, your feedback has been submitted!`);
-        reviewModal.style.display = 'none';
-        loadingPopup.style.display = 'none';
-        e.target.reset();
-      })
-      .catch(() => {
-        addToTerminal("> Something went wrong! Try again later.");
-        loadingPopup.style.display = 'none';
-      });
+    .then(res => res.json())
+    .then(() => {
+      addToTerminal(`> Thanks ${name}, your feedback has been submitted!`);
+      reviewModal.classList.remove('active');
+      loadingPopup.style.display = 'none';
+      e.target.reset();
+    })
+    .catch(() => {
+      addToTerminal("> Something went wrong! Try again later.");
+      loadingPopup.style.display = 'none';
+    });
   });
 });
