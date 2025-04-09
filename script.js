@@ -63,13 +63,13 @@ LinkedIn: <a href="https://www.linkedin.com/in/priyanshu-kumar-6716642b6/" targe
 GitHub: <a href="https://github.com/Priyanshusinha-A/" target="_blank">GitHub</a>`,
     
     review: () => {
-      reviewModal.style.display = 'flex';
+      reviewModal.classList.add('active');
       addToTerminal("> Review popup opened. Fill out the form or type 'clear' to close.");
     },
     
     clear: () => {
       output.innerHTML = "";
-      reviewModal.style.display = 'none';
+      reviewModal.classList.remove('active');
       addToTerminal("> Screen cleared. Type a command to continue.");
     }
   };
