@@ -41,26 +41,26 @@ document.addEventListener('DOMContentLoaded', function () {
 `,
     skills: "> HTML, CSS, JavaScript, C, C++, Java, Cyber Security, Data Analysis",
     projects: `
-      > Projects:
-      <ul>
-        <li><a href="https://priyanshusinha-a.github.io/home-page/" target="_blank">Home Page - Cybersecurity and Web Development Resources</a></li>
-        <li><a href="https://github.com/Priyanshusinha-A/E-PlantShopping-website" target="_blank">E-Plant Shopping - React + Express E-commerce</a></li>
-        <li><a href="https://github.com/Priyanshusinha-A/expressBookReviews" target="_blank">Express Book Reviews - Backend Book Management</a></li>
-      </ul>
+> Projects:
+<ul>
+  <li><a href="https://priyanshusinha-a.github.io/home-page/" target="_blank">Home Page - Cybersecurity and Web Development Resources</a></li>
+  <li><a href="https://github.com/Priyanshusinha-A/E-PlantShopping-website" target="_blank">E-Plant Shopping - React + Express E-commerce</a></li>
+  <li><a href="https://github.com/Priyanshusinha-A/expressBookReviews" target="_blank">Express Book Reviews - Backend Book Management</a></li>
+</ul>
     `,
     education: `
-      > Education & Certifications
-      - 🎓 <span class="highlight">B.Tech in Computer Science</span> - Ongoing (Black Diamond College of Engineering and Technology)<br>
-      - 🏅 <span class="highlight">DCSC (Drop Certified Security Course)</span> - Completed in 2024<br>
-      - 💻 <span class="highlight">ADCA (Advanced Diploma in Computer Applications) Hons</span> - Outstanding (2023)<br>
-      - 🏫 <span class="highlight">12th in Science</span> - Bagwan Surya Narayan College, Deo (2022)<br>
-      - 🏫 <span class="highlight">10th Standard</span> - Ganghar Public School (2020)<br>
+> Education & Certifications
+- 🎓 <span class="highlight">B.Tech in Computer Science</span> - Ongoing (Black Diamond College of Engineering and Technology)<br>
+- 🏅 <span class="highlight">DCSC (Drop Certified Security Course)</span> - Completed in 2024<br>
+- 💻 <span class="highlight">ADCA (Advanced Diploma in Computer Applications) Hons</span> - Outstanding (2023)<br>
+- 🏫 <span class="highlight">12th in Science</span> - Bagwan Surya Narayan College, Deo (2022)<br>
+- 🏫 <span class="highlight">10th Standard</span> - Ganghar Public School (2020)<br>
     `,
     contact: `
-      > Contact Me
-      Email: <a href="mailto:priyanshusinhatt@gmail.com">priyanshusinhatt@gmail.com</a><br>
-      LinkedIn: <a href="https://www.linkedin.com/in/priyanshu-kumar-6716642b6/" target="_blank">LinkedIn</a><br>
-      GitHub: <a href="https://github.com/Priyanshusinha-A/" target="_blank">GitHub</a>
+> Contact Me
+Email: <a href="mailto:priyanshusinhatt@gmail.com">priyanshusinhatt@gmail.com</a><br>
+LinkedIn: <a href="https://www.linkedin.com/in/priyanshu-kumar-6716642b6/" target="_blank">LinkedIn</a><br>
+GitHub: <a href="https://github.com/Priyanshusinha-A/" target="_blank">GitHub</a>
     `,
     clear: () => {
       output.innerHTML = "";
@@ -118,17 +118,17 @@ document.addEventListener('DOMContentLoaded', function () {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ name, experience, comment })
     })
-    .then(response => response.json())
-    .then(data => {
-      addToTerminal(`> Thank you, ${name}! Your ${experience.toLowerCase()} feedback has been sent successfully.`);
-      reviewFormContainer.style.display = 'none';
-      loadingPopup.style.display = 'none';
-      e.target.reset();
-    })
-    .catch(error => {
-      console.error('Error:', error);
-      addToTerminal("> Failed to send feedback. Please try again.");
-      loadingPopup.style.display = 'none';
-    });
+      .then(response => response.json())
+      .then(data => {
+        addToTerminal(`> Thank you, ${name}! Your ${experience.toLowerCase()} feedback has been sent successfully.`);
+        reviewFormContainer.style.display = 'none';
+        loadingPopup.style.display = 'none';
+        e.target.reset();
+      })
+      .catch(error => {
+        console.error('Error:', error);
+        addToTerminal("> Failed to send feedback. Please try again.");
+        loadingPopup.style.display = 'none';
+      });
   });
 });
