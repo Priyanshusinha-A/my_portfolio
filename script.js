@@ -5,8 +5,8 @@ document.addEventListener('DOMContentLoaded', function () {
   const input = document.getElementById('commandInput');
   const output = document.getElementById('output');
   const reviewFormContainer = document.getElementById('reviewFormContainer');
+  const loadingPopup = document.getElementById('loadingPopup');
 
-  // Typing Effect
   const text = "WELCOME TO MY PORTFOLIO";
   let index = 0;
 
@@ -27,36 +27,21 @@ document.addEventListener('DOMContentLoaded', function () {
   typingText.textContent = "";
   typeEffect();
 
-  // Commands
   const commands = {
     about: `
       > Hi, I'm <span class="highlight">Priyanshu Kumar Sinha</span>, a passionate Computer Science student currently pursuing my B.Tech from <span class="highlight">Black Diamond College of Engineering and Technology</span>. 
       My journey in technology has fueled my curiosity, especially in the fields of <span class="highlight">Cybersecurity</span> and <span class="highlight">Web Development</span>.<br>
-
-      > I have hands-on experience in <span class="highlight">HTML</span>, <span class="highlight">CSS</span>, <span class="highlight">Java</span>, <span class="highlight">JavaScript</span>, <span class="highlight">C</span>, and <span class="highlight">C++</span>, along with growing proficiency in AI technologies like <span class="highlight">OpenAI</span>. 
-      My expertise extends to <span class="highlight">Website Penetration Testing</span> and <span class="highlight">Bug Hunting</span>.<br>
-
+      > I have hands-on experience in <span class="highlight">HTML</span>, <span class="highlight">CSS</span>, <span class="highlight">Java</span>, <span class="highlight">JavaScript</span>, <span class="highlight">C</span>, and <span class="highlight">C++</span>, along with growing proficiency in AI technologies like <span class="highlight">OpenAI</span>.<br>
+      > My expertise extends to <span class="highlight">Website Penetration Testing</span> and <span class="highlight">Bug Hunting</span>.<br>
       > Looking ahead, I aspire to contribute to the tech industry by creating secure, user-friendly solutions. Let's connect and explore cybersecurity or emerging AI innovations together!<br>
     `,
     skills: "> HTML, CSS, JavaScript, C, C++, Java, Cyber Security, Data Analysis",
     projects: `
       > Projects:
       <ul>
-        <li>
-          <a href="https://priyanshusinha-a.github.io/home-page/" target="_blank">
-            Home Page - Cybersecurity and Web Development Resources
-          </a>
-        </li>
-        <li>
-          <a href="https://github.com/Priyanshusinha-A/E-PlantShopping-website" target="_blank">
-            E-Plant Shopping - React + Express E-commerce
-          </a>
-        </li>
-        <li>
-          <a href="https://github.com/Priyanshusinha-A/expressBookReviews" target="_blank">
-            Express Book Reviews - Backend Book Management
-          </a>
-        </li>
+        <li><a href="https://priyanshusinha-a.github.io/home-page/" target="_blank">Home Page - Cybersecurity and Web Development Resources</a></li>
+        <li><a href="https://github.com/Priyanshusinha-A/E-PlantShopping-website" target="_blank">E-Plant Shopping - React + Express E-commerce</a></li>
+        <li><a href="https://github.com/Priyanshusinha-A/expressBookReviews" target="_blank">Express Book Reviews - Backend Book Management</a></li>
       </ul>
     `,
     education: `
@@ -84,7 +69,6 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   };
 
-  // Command Input Handling
   input.addEventListener('keydown', function (event) {
     if (event.key === 'Enter') {
       const command = input.value.trim().toLowerCase();
@@ -103,7 +87,6 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   });
 
-  // Display Text in Terminal
   function addToTerminal(text) {
     const newLine = document.createElement('div');
     newLine.className = 'line';
@@ -112,7 +95,6 @@ document.addEventListener('DOMContentLoaded', function () {
     output.scrollTop = output.scrollHeight;
   }
 
-  // Handle Form Submission
   document.getElementById('reviewForm').addEventListener('submit', function (e) {
     e.preventDefault();
 
@@ -125,6 +107,8 @@ document.addEventListener('DOMContentLoaded', function () {
       return;
     }
 
+    loadingPopup.style.display = 'flex';
+
     fetch('https://my-portfolio-1-9b3k.onrender.com/send-feedback', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -134,11 +118,13 @@ document.addEventListener('DOMContentLoaded', function () {
     .then(data => {
       addToTerminal(`> Thank you, ${name}! Your ${experience.toLowerCase()} feedback has been sent successfully.`);
       reviewFormContainer.style.display = 'none';
+      loadingPopup.style.display = 'none';
       e.target.reset();
     })
     .catch(error => {
       console.error('Error:', error);
       addToTerminal("> Failed to send feedback. Please try again.");
+      loadingPopup.style.display = 'none';
     });
   });
 });
