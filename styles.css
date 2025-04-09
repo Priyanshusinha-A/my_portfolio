@@ -214,3 +214,11 @@ a:hover {
   50% { opacity: 0; }
   100% { opacity: 1; }
 }
+.modal {
+  display: none;
+}
+
+.modal.active {
+  display: flex;
+}
+
