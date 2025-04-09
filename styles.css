@@ -59,11 +59,19 @@ input, textarea, button {
   background-color: #000;
   border: 1px solid #00FF00;
   margin-bottom: 10px;
+  width: 100%;
+  padding: 5px;
+  box-sizing: border-box;
+}
+
+textarea {
+  resize: vertical;
 }
 
 button {
   padding: 5px 15px;
   cursor: pointer;
+  background-color: transparent;
 }
 
 button:hover {
@@ -71,18 +79,43 @@ button:hover {
   color: #000;
 }
 
-/* Glitch Loading Popup */
-.loading-popup {
+/* Modal Popup (Review Form) */
+.modal {
+  display: none;
   position: fixed;
-  top: 0;
-  left: 0;
+  z-index: 1000;
+  left: 0; top: 0;
   width: 100%;
   height: 100%;
-  background: #000;
-  display: flex;
-  align-items: center;
+  background-color: rgba(0, 0, 0, 0.95);
   justify-content: center;
-  z-index: 9999;
+  align-items: center;
+}
+
+.modal-content {
+  background-color: #111;
+  color: #00FF00;
+  padding: 20px;
+  border: 2px solid #00FF00;
+  font-family: 'Courier New', Courier, monospace;
+  width: 90%;
+  max-width: 500px;
+  border-radius: 10px;
+  text-align: left;
+}
+
+/* Glitch Loading Popup */
+#loadingPopup {
+  display: none;
+  position: fixed;
+  z-index: 1001;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.9);
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .glitch-text {
