@@ -1,11 +1,10 @@
-/* === Terminal Theme === */
+/* Terminal Theme */
 body {
   background-color: #000;
   color: #00FF00;
   font-family: 'Courier New', Courier, monospace;
   margin: 0;
   padding: 20px;
-  overflow-x: hidden;
 }
 
 .terminal {
@@ -28,15 +27,16 @@ body {
   color: #FFF000;
 }
 
+/* Improved Link Styling */
 a {
   color: #FF4500;
   text-decoration: none;
   font-weight: bold;
   cursor: pointer;
+  transition: color 0.3s, text-decoration 0.3s;
   background-color: rgba(255, 69, 0, 0.1);
   padding: 2px 4px;
   border-radius: 4px;
-  transition: color 0.3s, text-decoration 0.3s;
 }
 
 a:hover {
@@ -44,140 +44,45 @@ a:hover {
   text-decoration: underline;
 }
 
-/* === Typing Command Input === */
-.command-area {
-  display: flex;
-  align-items: center;
-  margin-top: 15px;
+/* Form Styling */
+form {
+  margin-top: 20px;
 }
 
-.prompt {
-  margin-right: 5px;
-  color: #0f0;
+label {
+  color: #00FF00;
 }
 
-#commandInput {
+input, textarea, button {
+  font-family: 'Courier New', Courier, monospace;
+  color: #00FF00;
   background-color: #000;
-  color: #00FF00;
-  border: none;
-  outline: none;
-  font-family: inherit;
-  font-size: 16px;
-  width: 100%;
-  animation: glowInput 0.2s ease-out;
-}
-
-@keyframes glowInput {
-  0% {
-    text-shadow: 0 0 5px #0f0;
-  }
-  100% {
-    text-shadow: none;
-  }
-}
-
-/* === Review Modal Popup === */
-#reviewFormContainer {
-  display: none;
-  position: fixed;
-  z-index: 999;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.9);
-  backdrop-filter: blur(4px);
-  justify-content: center;
-  align-items: center;
-}
-
-#reviewFormContainer.active {
-  display: flex;
-}
-
-/* Matrix Animated Background inside Popup */
-#reviewForm {
-  position: relative;
-  width: 90%;
-  max-width: 400px;
-  padding: 25px;
-  border: 2px solid #00FF00;
-  border-radius: 15px;
-  color: #00FF00;
-  background: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSjVfkfU31y-FosQKHYURAxpLndDFOhJBfI6A&s') repeat;
-  background-size: cover;
-  box-shadow: 0 0 20px #00FF00;
-  animation: scrollMatrix 30s linear infinite;
-  font-size: 14px;
-}
-
-@keyframes scrollMatrix {
-  0% {
-    background-position: 0 0;
-  }
-  100% {
-    background-position: 0 100%;
-  }
-}
-
-#reviewForm label {
-  display: block;
-  margin-bottom: 5px;
-  font-weight: bold;
-  color: #00FF00;
-}
-
-#reviewForm input[type="text"],
-#reviewForm input[type="email"],
-#reviewForm textarea {
-  width: 100%;
-  padding: 10px;
-  background-color: rgba(0, 0, 0, 0.7);
-  color: #00FF00;
   border: 1px solid #00FF00;
-  border-radius: 8px;
-  margin-bottom: 15px;
-  font-size: 14px;
-  transition: box-shadow 0.3s;
+  margin-bottom: 10px;
 }
 
-#reviewForm input[type="text"]:focus,
-#reviewForm textarea:focus {
-  box-shadow: 0 0 8px #00FF00;
+button {
+  padding: 5px 15px;
+  cursor: pointer;
 }
 
-#reviewForm input[type="radio"] {
-  margin-right: 5px;
-}
-
-#reviewForm button {
+button:hover {
   background-color: #00FF00;
   color: #000;
-  padding: 8px 20px;
-  font-weight: bold;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: background-color 0.3s;
 }
 
-#reviewForm button:hover {
-  background-color: #0f0;
-}
-
-/* === Loading Popup === */
-#loadingPopup {
-  display: none;
+/* Glitch Loading Popup */
+.loading-popup {
   position: fixed;
-  z-index: 1001;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.9);
+  background: #000;
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
+  z-index: 9999;
 }
 
 .glitch-text {
@@ -195,23 +100,4 @@ a:hover {
   60% { text-shadow: -2px 0 red, 2px 0 cyan; }
   80% { text-shadow: 2px 0 red, -2px 0 cyan; }
   100% { text-shadow: -2px 0 red, 2px 0 cyan; }
-}
-
-/* === Typing Animation === */
-.typing-container {
-  text-align: center;
-  margin-top: 100px;
-  font-size: 24px;
-  color: #00FF00;
-}
-
-.cursor {
-  display: inline-block;
-  animation: blink 0.7s infinite;
-}
-
-@keyframes blink {
-  0% { opacity: 1; }
-  50% { opacity: 0; }
-  100% { opacity: 1; }
 }
