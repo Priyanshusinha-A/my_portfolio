@@ -3,51 +3,61 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Priyanshu's Portfolio Terminal</title>
+  <title>Terminal Portfolio - Priyanshu Kumar</title>
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-
-  <!-- Typing Welcome Message -->
+  <!-- Typing Effect Section -->
   <div class="typing-container">
-    <span id="typing-text"></span><span class="cursor">|</span>
-  </div>
-
-  <!-- Terminal Section -->
-  <div id="terminal" style="display: none;">
-    <div id="output"></div>
-    <div class="input-line">
-      <span class="prompt">&gt;</span>
-      <input type="text" id="commandInput" autocomplete="off" autofocus />
-    </div>
-    <div id="suggestions" class="suggestions"></div>
-  </div>
-
-  <!-- Review Modal -->
-  <div id="reviewModal" class="modal">
-    <div class="modal-content">
-      <span id="closeModal" class="close">&times;</span>
-      <form id="reviewForm">
-        <h2>Feedback Form</h2>
-        <input type="text" id="name" placeholder="Your Name" required />
-        <input type="email" id="gmail" placeholder="Your Gmail (optional)" />
-
-        <div class="experience-options">
-          <label><input type="radio" name="experience" value="good" required /> Good</label>
-          <label><input type="radio" name="experience" value="average" /> Average</label>
-          <label><input type="radio" name="experience" value="bad" /> Bad</label>
-        </div>
-
-        <textarea id="comment" placeholder="Your Comment" required></textarea>
-        <button type="submit">Submit</button>
-      </form>
+    <div class="typing-header">
+      <span id="typing-text"></span>
+      <span class="cursor">|</span>
     </div>
   </div>
 
-  <!-- Loading Popup -->
-  <div id="loadingPopup" class="loading-popup">
-    <div class="loader"></div>
-    <p>Sending feedback...</p>
+  <!-- Main Terminal Section -->
+  <div class="terminal" id="terminal" style="display: none;">
+    <div class="header">Welcome to Priyanshu Kumar's Portfolio</div>
+
+    <!-- Terminal Content -->
+    <div class="content">
+      <div class="line">> Hi! My name is <span class="highlight">Priyanshu Kumar</span>.</div>
+      <div class="line">> Do you want to know more about me? If yes, type a command below:</div>
+      <div class="line">> Available commands: <span class="highlight">about, skills, projects, education, contact, review, clear</span></div>
+      
+      <!-- Terminal Command Area -->
+      <div class="command-area">
+        <span class="prompt">></span>
+        <input type="text" id="commandInput" autofocus />
+      </div>
+
+      <!-- Output Area -->
+      <div id="output"></div>
+
+      <!-- Review Form (Hidden by Default) -->
+      <div id="reviewFormContainer" style="display: none;">
+        <form id="reviewForm">
+          <label for="name">Name:</label>
+          <input type="text" id="name" required /><br /><br />
+
+          <label>Experience:</label>
+          <input type="radio" id="positive" name="experience" value="Positive" required />
+          <label for="positive">Positive</label>
+          <input type="radio" id="negative" name="experience" value="Negative" />
+          <label for="negative">Negative</label><br /><br />
+
+          <label for="comment">Comments:</label>
+          <textarea id="comment" rows="4" cols="50" required></textarea><br /><br />
+          
+          <button type="submit">Submit Feedback</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Glitch Terminal Loading Popup -->
+  <div id="loadingPopup" class="loading-popup" style="display: none;">
+    <div class="glitch-text">SENDING FEEDBACK...</div>
   </div>
 
   <script src="script.js"></script>
