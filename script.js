@@ -7,13 +7,15 @@ document.addEventListener('DOMContentLoaded', function () {
   const reviewModal = document.getElementById('reviewModal');
   const loadingPopup = document.getElementById('loadingPopup');
   const closeModal = document.getElementById('closeModal');
-
-  let commandHistory = [];
-  let historyIndex = -1;
-  let isDark = true;
+  const suggestions = document.getElementById('suggestions');
 
   const text = "WELCOME TO MY PORTFOLIO";
   let index = 0;
+  let commandHistory = [];
+  let historyIndex = -1;
+  let isDarkMode = true;
+
+  const commandList = ['about', 'skills', 'projects', 'education', 'contact', 'review', 'clear', 'theme'];
 
   function typeEffect() {
     if (index < text.length) {
@@ -25,6 +27,7 @@ document.addEventListener('DOMContentLoaded', function () {
       setTimeout(() => {
         document.querySelector('.typing-container').style.display = 'none';
         terminal.style.display = 'block';
+        input.focus();
       }, 1000);
     }
   }
@@ -34,7 +37,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
   const commands = {
     about: `
-    > Hey there! I'm <span class="highlight">Priyanshu Kumar Sinha</span>, a driven and enthusiastic Computer Science undergraduate at <span class="highlight">Black Diamond College of Engineering and Technology</span>. I'm not just learning tech — I'm <em>living</em> it.<br><br>
+> Hey there! I'm <span class="highlight">Priyanshu Kumar Sinha</span>, a driven and enthusiastic Computer Science undergraduate at <span class="highlight">Black Diamond College of Engineering and Technology</span>. I'm not just learning tech — I'm <em>living</em> it.<br><br>
 
 > My journey in technology is fueled by a relentless curiosity and a genuine passion for <span class="highlight">Cybersecurity</span> and <span class="highlight">Full Stack Web Development</span>. From designing clean, user-focused interfaces to diving deep into system vulnerabilities, I thrive on turning ideas into impactful digital solutions.<br><br>
 
@@ -44,8 +47,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
 > 💡 I’m always open to exciting collaborations, innovative ideas, or just a good geeky conversation. Let's connect and explore the world of <span class="highlight">cybersecurity</span>, <span class="highlight">AI innovation</span>, and everything in between!<br>
 `,
-  
-    skills: "> HTML, CSS, JavaScript, C, C++, Java, Cyber Security, Data Analysis",
+     `,
+    skills: `> HTML, CSS, JavaScript, Java, C, C++, Cybersecurity, AI, Penetration Testing`,
     projects: `
 > Projects:
 <ul>
@@ -55,52 +58,42 @@ document.addEventListener('DOMContentLoaded', function () {
 </ul>`,
     education: `
 > Education & Certifications:
-- 🎓 <span class="highlight">B.Tech in Computer Science</span> - BDCE
-- 🏅 DCSC - Completed 2024
+- 🎓 <span class="highlight">B.Tech CSE</span> - BDCE
+- 🏅 DCSC - 2024
 - 💻 ADCA Hons - 2023
 - 🏫 12th - BSN College, Deo (2022)
-- 🏫 10th - Ganghar Public School (2020)`,
+- 🏫 10th - Ganghar Public School (2020)
+    `,
     contact: `
 > Contact Me:
 Email: <a href="mailto:priyanshusinhatt@gmail.com">priyanshusinhatt@gmail.com</a><br>
 LinkedIn: <a href="https://www.linkedin.com/in/priyanshu-kumar-6716642b6/" target="_blank">LinkedIn</a><br>
-GitHub: <a href="https://github.com/Priyanshusinha-A/" target="_blank">GitHub</a>`,
-
+GitHub: <a href="https://github.com/Priyanshusinha-A/" target="_blank">GitHub</a>
+    `,
     review: () => {
       reviewModal.classList.add('active');
       addToTerminal("> Review popup opened. Fill out the form or type 'clear' to close.");
     },
-
     clear: () => {
       output.innerHTML = "";
       reviewModal.classList.remove('active');
       addToTerminal("> Screen cleared. Type a command to continue.");
     },
-
-    history: () => {
-      if (commandHistory.length === 0) {
-        addToTerminal("> No previous commands found.");
-      } else {
-        addToTerminal("> Command History:");
-        commandHistory.forEach((cmd, index) => {
-          addToTerminal(`${index + 1}: ${cmd}`);
-        });
-      }
-    },
-
     theme: () => {
-      document.body.classList.toggle('dark-theme');
-      isDark = !isDark;
-      addToTerminal(`> Theme switched to ${isDark ? "Dark" : "Light"} mode.`);
+      isDarkMode = !isDarkMode;
+      document.body.classList.toggle('light-theme', !isDarkMode);
+      addToTerminal(`> Theme switched to ${isDarkMode ? 'dark' : 'light'} mode.`);
     }
   };
 
   input.addEventListener('keydown', function (event) {
     if (event.key === 'Enter') {
       const command = input.value.trim().toLowerCase();
-      if (command) commandHistory.push(command);
-      historyIndex = commandHistory.length;
+      if (!command) return;
       input.value = '';
+      suggestions.innerHTML = '';
+      commandHistory.push(command);
+      historyIndex = commandHistory.length;
 
       if (commands[command]) {
         addToTerminal(`> ${command}`);
@@ -110,11 +103,11 @@ GitHub: <a href="https://github.com/Priyanshusinha-A/" target="_blank">GitHub</a
           addToTerminal(commands[command]);
         }
       } else {
-        addToTerminal(`> Unknown command: "${command}". Try about, skills, projects, education, contact, review, clear, history, theme.`);
+        addToTerminal(`> Unknown command: "${command}". Try: ${commandList.join(', ')}`);
       }
     }
 
-    // Arrow Up: Show previous command
+    // Command history
     if (event.key === 'ArrowUp') {
       if (historyIndex > 0) {
         historyIndex--;
@@ -122,26 +115,34 @@ GitHub: <a href="https://github.com/Priyanshusinha-A/" target="_blank">GitHub</a
       }
     }
 
-    // Arrow Down: Show next command
     if (event.key === 'ArrowDown') {
       if (historyIndex < commandHistory.length - 1) {
         historyIndex++;
         input.value = commandHistory[historyIndex];
       } else {
         input.value = '';
+        historyIndex = commandHistory.length;
       }
     }
   });
 
-  // Autocomplete hint (tooltip style)
-  input.addEventListener('input', () => {
+  // Autocomplete suggestions
+  input.addEventListener('input', function () {
     const val = input.value.toLowerCase();
-    const matches = Object.keys(commands).filter(cmd => cmd.startsWith(val));
-    if (matches.length === 1) {
-      input.setAttribute('title', matches[0]);
-    } else {
-      input.removeAttribute('title');
-    }
+    suggestions.innerHTML = '';
+    if (val.length === 0) return;
+    const matches = commandList.filter(cmd => cmd.startsWith(val));
+    matches.forEach(match => {
+      const div = document.createElement('div');
+      div.className = 'suggestion';
+      div.textContent = match;
+      div.addEventListener('click', () => {
+        input.value = match;
+        suggestions.innerHTML = '';
+        input.focus();
+      });
+      suggestions.appendChild(div);
+    });
   });
 
   closeModal.addEventListener('click', () => {
@@ -162,36 +163,39 @@ GitHub: <a href="https://github.com/Priyanshusinha-A/" target="_blank">GitHub</a
     output.scrollTop = output.scrollHeight;
   }
 
-  document.getElementById('reviewForm').addEventListener('submit', function (e) {
-    e.preventDefault();
+  const reviewForm = document.getElementById('reviewForm');
+  if (reviewForm) {
+    reviewForm.addEventListener('submit', function (e) {
+      e.preventDefault();
 
-    const name = document.getElementById('name').value;
-    const experience = document.querySelector('input[name="experience"]:checked')?.value;
-    const comment = document.getElementById('comment').value;
-    const gmail = document.getElementById('gmail').value;
+      const name = document.getElementById('name').value;
+      const experience = document.querySelector('input[name="experience"]:checked')?.value;
+      const comment = document.getElementById('comment').value;
+      const gmail = document.getElementById('gmail').value;
 
-    if (!name || !experience || !comment) {
-      addToTerminal("> Please fill all required fields before submitting.");
-      return;
-    }
+      if (!name || !experience || !comment) {
+        addToTerminal("> Please fill all required fields before submitting.");
+        return;
+      }
 
-    loadingPopup.style.display = 'flex';
+      loadingPopup.style.display = 'flex';
 
-    fetch('https://my-portfolio-1-9b3k.onrender.com/send-feedback', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ name, experience, comment, gmail })
-    })
-      .then(res => res.json())
-      .then(() => {
-        addToTerminal(`> Thanks ${name}, your feedback has been submitted!`);
-        reviewModal.classList.remove('active');
-        loadingPopup.style.display = 'none';
-        e.target.reset();
+      fetch('https://my-portfolio-1-9b3k.onrender.com/send-feedback', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, experience, comment, gmail })
       })
-      .catch(() => {
-        addToTerminal("> Something went wrong! Try again later.");
-        loadingPopup.style.display = 'none';
-      });
-  });
+        .then(res => res.json())
+        .then(() => {
+          addToTerminal(`> Thanks ${name}, your feedback has been submitted!`);
+          reviewModal.classList.remove('active');
+          loadingPopup.style.display = 'none';
+          reviewForm.reset();
+        })
+        .catch(() => {
+          addToTerminal("> Something went wrong! Try again later.");
+          loadingPopup.style.display = 'none';
+        });
+    });
+  }
 });
