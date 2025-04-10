@@ -8,6 +8,10 @@ document.addEventListener('DOMContentLoaded', function () {
   const loadingPopup = document.getElementById('loadingPopup');
   const closeModal = document.getElementById('closeModal');
 
+  let commandHistory = [];
+  let historyIndex = -1;
+  let isDark = true;
+
   const text = "WELCOME TO MY PORTFOLIO";
   let index = 0;
 
@@ -29,8 +33,8 @@ document.addEventListener('DOMContentLoaded', function () {
   typeEffect();
 
   const commands = {
- about: `
- > Hey there! I'm <span class="highlight">Priyanshu Kumar Sinha</span>, a driven and enthusiastic Computer Science undergraduate at <span class="highlight">Black Diamond College of Engineering and Technology</span>. I'm not just learning tech — I'm <em>living</em> it.<br><br>
+    about: `
+    > Hey there! I'm <span class="highlight">Priyanshu Kumar Sinha</span>, a driven and enthusiastic Computer Science undergraduate at <span class="highlight">Black Diamond College of Engineering and Technology</span>. I'm not just learning tech — I'm <em>living</em> it.<br><br>
 
 > My journey in technology is fueled by a relentless curiosity and a genuine passion for <span class="highlight">Cybersecurity</span> and <span class="highlight">Full Stack Web Development</span>. From designing clean, user-focused interfaces to diving deep into system vulnerabilities, I thrive on turning ideas into impactful digital solutions.<br><br>
 
@@ -41,7 +45,6 @@ document.addEventListener('DOMContentLoaded', function () {
 > 💡 I’m always open to exciting collaborations, innovative ideas, or just a good geeky conversation. Let's connect and explore the world of <span class="highlight">cybersecurity</span>, <span class="highlight">AI innovation</span>, and everything in between!<br>
 `,
   
-
     skills: "> HTML, CSS, JavaScript, C, C++, Java, Cyber Security, Data Analysis",
     projects: `
 > Projects:
@@ -62,7 +65,7 @@ document.addEventListener('DOMContentLoaded', function () {
 Email: <a href="mailto:priyanshusinhatt@gmail.com">priyanshusinhatt@gmail.com</a><br>
 LinkedIn: <a href="https://www.linkedin.com/in/priyanshu-kumar-6716642b6/" target="_blank">LinkedIn</a><br>
 GitHub: <a href="https://github.com/Priyanshusinha-A/" target="_blank">GitHub</a>`,
-    
+
     review: () => {
       reviewModal.classList.add('active');
       addToTerminal("> Review popup opened. Fill out the form or type 'clear' to close.");
@@ -72,12 +75,31 @@ GitHub: <a href="https://github.com/Priyanshusinha-A/" target="_blank">GitHub</a
       output.innerHTML = "";
       reviewModal.classList.remove('active');
       addToTerminal("> Screen cleared. Type a command to continue.");
+    },
+
+    history: () => {
+      if (commandHistory.length === 0) {
+        addToTerminal("> No previous commands found.");
+      } else {
+        addToTerminal("> Command History:");
+        commandHistory.forEach((cmd, index) => {
+          addToTerminal(`${index + 1}: ${cmd}`);
+        });
+      }
+    },
+
+    theme: () => {
+      document.body.classList.toggle('dark-theme');
+      isDark = !isDark;
+      addToTerminal(`> Theme switched to ${isDark ? "Dark" : "Light"} mode.`);
     }
   };
 
   input.addEventListener('keydown', function (event) {
     if (event.key === 'Enter') {
       const command = input.value.trim().toLowerCase();
+      if (command) commandHistory.push(command);
+      historyIndex = commandHistory.length;
       input.value = '';
 
       if (commands[command]) {
@@ -88,17 +110,44 @@ GitHub: <a href="https://github.com/Priyanshusinha-A/" target="_blank">GitHub</a
           addToTerminal(commands[command]);
         }
       } else {
-        addToTerminal(`> Unknown command: "${command}". Try about, skills, projects, education, contact, review, clear.`);
+        addToTerminal(`> Unknown command: "${command}". Try about, skills, projects, education, contact, review, clear, history, theme.`);
+      }
+    }
+
+    // Arrow Up: Show previous command
+    if (event.key === 'ArrowUp') {
+      if (historyIndex > 0) {
+        historyIndex--;
+        input.value = commandHistory[historyIndex];
+      }
+    }
+
+    // Arrow Down: Show next command
+    if (event.key === 'ArrowDown') {
+      if (historyIndex < commandHistory.length - 1) {
+        historyIndex++;
+        input.value = commandHistory[historyIndex];
+      } else {
+        input.value = '';
       }
     }
   });
 
-  // Close modal when clicking "X"
+  // Autocomplete hint (tooltip style)
+  input.addEventListener('input', () => {
+    const val = input.value.toLowerCase();
+    const matches = Object.keys(commands).filter(cmd => cmd.startsWith(val));
+    if (matches.length === 1) {
+      input.setAttribute('title', matches[0]);
+    } else {
+      input.removeAttribute('title');
+    }
+  });
+
   closeModal.addEventListener('click', () => {
     reviewModal.classList.remove('active');
   });
 
-  // Close modal when pressing Escape
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') {
       reviewModal.classList.remove('active');
@@ -113,7 +162,6 @@ GitHub: <a href="https://github.com/Priyanshusinha-A/" target="_blank">GitHub</a
     output.scrollTop = output.scrollHeight;
   }
 
-  // Form submission
   document.getElementById('reviewForm').addEventListener('submit', function (e) {
     e.preventDefault();
 
@@ -134,16 +182,16 @@ GitHub: <a href="https://github.com/Priyanshusinha-A/" target="_blank">GitHub</a
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ name, experience, comment, gmail })
     })
-    .then(res => res.json())
-    .then(() => {
-      addToTerminal(`> Thanks ${name}, your feedback has been submitted!`);
-      reviewModal.classList.remove('active');
-      loadingPopup.style.display = 'none';
-      e.target.reset();
-    })
-    .catch(() => {
-      addToTerminal("> Something went wrong! Try again later.");
-      loadingPopup.style.display = 'none';
-    });
+      .then(res => res.json())
+      .then(() => {
+        addToTerminal(`> Thanks ${name}, your feedback has been submitted!`);
+        reviewModal.classList.remove('active');
+        loadingPopup.style.display = 'none';
+        e.target.reset();
+      })
+      .catch(() => {
+        addToTerminal("> Something went wrong! Try again later.");
+        loadingPopup.style.display = 'none';
+      });
   });
 });
