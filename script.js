@@ -46,7 +46,6 @@ document.addEventListener('DOMContentLoaded', function () {
 > 🚀 I believe in building solutions that are not only powerful and scalable, but also safe, ethical, and accessible. Whether it's developing secure web platforms or automating systems with AI, I'm here to shape the future of tech — one project at a time.<br><br>
 
 > 💡 I’m always open to exciting collaborations, innovative ideas, or just a good geeky conversation. Let's connect and explore the world of <span class="highlight">cybersecurity</span>, <span class="highlight">AI innovation</span>, and everything in between!<br>
-`,
      `,
     skills: `> HTML, CSS, JavaScript, Java, C, C++, Cybersecurity, AI, Penetration Testing`,
     projects: `
