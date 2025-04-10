@@ -1,4 +1,3 @@
-/* Terminal Theme */
 body {
   background-color: #000;
   color: #00FF00;
@@ -29,18 +28,18 @@ body {
 
 /* Improved Link Styling */
 a {
-  color: #FF4500;
+  color: #FF4500; /* Brighter red-orange */
   text-decoration: none;
   font-weight: bold;
   cursor: pointer;
   transition: color 0.3s, text-decoration 0.3s;
-  background-color: rgba(255, 69, 0, 0.1);
+  background-color: rgba(255, 69, 0, 0.1); /* subtle terminal-style glow */
   padding: 2px 4px;
   border-radius: 4px;
 }
 
 a:hover {
-  color: #FF6347;
+  color: #FF6347; /* Tomato red on hover */
   text-decoration: underline;
 }
 
@@ -71,33 +70,4 @@ button:hover {
   color: #000;
 }
 
-/* Glitch Loading Popup */
-.loading-popup {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: #000;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 9999;
-}
 
-.glitch-text {
-  font-size: 2rem;
-  font-weight: bold;
-  color: #00FF00;
-  font-family: 'Courier New', Courier, monospace;
-  animation: glitch 1s infinite;
-}
-
-@keyframes glitch {
-  0% { text-shadow: 2px 0 red, -2px 0 cyan; }
-  20% { text-shadow: -2px 0 red, 2px 0 cyan; }
-  40% { text-shadow: 2px 0 red, -2px 0 cyan; }
-  60% { text-shadow: -2px 0 red, 2px 0 cyan; }
-  80% { text-shadow: 2px 0 red, -2px 0 cyan; }
-  100% { text-shadow: -2px 0 red, 2px 0 cyan; }
-}
