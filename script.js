@@ -29,15 +29,18 @@ document.addEventListener('DOMContentLoaded', function () {
 
   // Commands
   const commands = {
-    about: 
-      > Hi, I'm <span class="highlight">Priyanshu Kumar Sinha</span>, a passionate Computer Science student currently pursuing my B.Tech from <span class="highlight">Black Diamond College of Engineering and Technology</span>. 
-      My journey in technology has fueled my curiosity, especially in the fields of <span class="highlight">Cybersecurity</span> and <span class="highlight">Web Development</span>.<br>
+    about: '
+      > Hey there! I'm <span class="highlight">Priyanshu Kumar Sinha</span>, a driven and enthusiastic Computer Science undergraduate at <span class="highlight">Black Diamond College of Engineering and Technology</span>. I'm not just learning tech — I'm <em>living</em> it.<br><br>
 
-      > I have hands-on experience in <span class="highlight">HTML</span>, <span class="highlight">CSS</span>, <span class="highlight">Java</span>, <span class="highlight">JavaScript</span>, <span class="highlight">C</span>, and <span class="highlight">C++</span>, along with growing proficiency in AI technologies like <span class="highlight">OpenAI</span>. 
-      My expertise extends to <span class="highlight">Website Penetration Testing</span> and <span class="highlight">Bug Hunting</span>.<br>
+> My journey in technology is fueled by a relentless curiosity and a genuine passion for <span class="highlight">Cybersecurity</span> and <span class="highlight">Full Stack Web Development</span>. From designing clean, user-focused interfaces to diving deep into system vulnerabilities, I thrive on turning ideas into impactful digital solutions.<br><br>
 
-      > Looking ahead, I aspire to contribute to the tech industry by creating secure, user-friendly solutions. Let's connect and explore cybersecurity or emerging AI innovations together!<br>
-    ,
+> 🛡️ With hands-on experience in <span class="highlight">Penetration Testing</span> and <span class="highlight">Bug Hunting</span>, I don’t just build websites — I secure them. I’ve sharpened my skills in <span class="highlight">HTML</span>, <span class="highlight">CSS</span>, <span class="highlight">JavaScript</span>, <span class="highlight">Java</span>, <span class="highlight">C</span>, and <span class="highlight">C++</span>, while exploring the exciting potential of <span class="highlight">AI technologies</span> like <span class="highlight">OpenAI</span>.<br><br>
+
+> 🚀 I believe in building solutions that are not only powerful and scalable, but also safe, ethical, and accessible. Whether it's developing secure web platforms or automating systems with AI, I'm here to shape the future of tech — one project at a time.<br><br>
+
+> 💡 I’m always open to exciting collaborations, innovative ideas, or just a good geeky conversation. Let's connect and explore the world of <span class="highlight">cybersecurity</span>, <span class="highlight">AI innovation</span>, and everything in between!<br>
+
+      ',
     skills: "> HTML, CSS, JavaScript, C, C++, Java, Cyber Security, Data Analysis",
     projects: 
       > Projects:
