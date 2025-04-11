@@ -1,4 +1,4 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -33,26 +33,38 @@
 
       <!-- Output Area -->
       <div id="output"></div>
-
-      <!-- Review Form (Hidden by Default) -->
-      <div id="reviewFormContainer" style="display: none;">
-        <form id="reviewForm">
-          <label for="name">Name:</label>
-          <input type="text" id="name" required /><br /><br />
-
-          <label>Experience:</label>
-          <input type="radio" id="positive" name="experience" value="Positive" required />
-          <label for="positive">Positive</label>
-          <input type="radio" id="negative" name="experience" value="Negative" />
-          <label for="negative">Negative</label><br /><br />
-
-          <label for="comment">Comments:</label>
-          <textarea id="comment" rows="4" cols="50" required></textarea><br /><br />
-          
-          <button type="submit">Submit Feedback</button>
-        </form>
-      </div>
     </div>
+  </div>
+
+  <!-- Review Modal Popup -->
+  <div id="reviewModal" class="modal">
+    <div class="modal-content">
+      <span id="closeModal" class="close-button">&times;</span>
+      <h2>Submit Your Review</h2>
+      <form id="reviewForm">
+        <label for="name">Name:</label>
+        <input type="text" id="name" required /><br /><br />
+
+        <label for="gmail">Gmail (optional):</label>
+        <input type="email" id="gmail" placeholder="you@gmail.com" /><br /><br />
+
+        <label>Experience:</label>
+        <input type="radio" id="positive" name="experience" value="Positive" required />
+        <label for="positive">Positive</label>
+        <input type="radio" id="negative" name="experience" value="Negative" />
+        <label for="negative">Negative</label><br /><br />
+
+        <label for="comment">Comments:</label>
+        <textarea id="comment" rows="4" cols="50" required></textarea><br /><br />
+
+        <button type="submit">Submit Feedback</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Loading Popup -->
+  <div id="loadingPopup" class="loading-popup">
+    <div class="glitch-text">SENDING FEEDBACK...</div>
   </div>
 
   <script src="script.js"></script>
