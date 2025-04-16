@@ -29,58 +29,51 @@ document.addEventListener('DOMContentLoaded', function () {
 
   // Commands
   const commands = {
-    about: '
-      > Hey there! I'm <span class="highlight">Priyanshu Kumar Sinha</span>, a driven and enthusiastic Computer Science undergraduate at <span class="highlight">Black Diamond College of Engineering and Technology</span>. I'm not just learning tech — I'm <em>living</em> it.<br><br>
-
+    about: `> Hey there! I'm <span class="highlight">Priyanshu Kumar Sinha</span>, a driven and enthusiastic Computer Science undergraduate at <span class="highlight">Black Diamond College of Engineering and Technology</span>. I'm not just learning tech — I'm <em>living</em> it.<br><br>
 > My journey in technology is fueled by a relentless curiosity and a genuine passion for <span class="highlight">Cybersecurity</span> and <span class="highlight">Full Stack Web Development</span>. From designing clean, user-focused interfaces to diving deep into system vulnerabilities, I thrive on turning ideas into impactful digital solutions.<br><br>
-
 > 🛡️ With hands-on experience in <span class="highlight">Penetration Testing</span> and <span class="highlight">Bug Hunting</span>, I don’t just build websites — I secure them. I’ve sharpened my skills in <span class="highlight">HTML</span>, <span class="highlight">CSS</span>, <span class="highlight">JavaScript</span>, <span class="highlight">Java</span>, <span class="highlight">C</span>, and <span class="highlight">C++</span>, while exploring the exciting potential of <span class="highlight">AI technologies</span> like <span class="highlight">OpenAI</span>.<br><br>
-
 > 🚀 I believe in building solutions that are not only powerful and scalable, but also safe, ethical, and accessible. Whether it's developing secure web platforms or automating systems with AI, I'm here to shape the future of tech — one project at a time.<br><br>
+> 💡 I’m always open to exciting collaborations, innovative ideas, or just a good geeky conversation. Let's connect and explore the world of <span class="highlight">cybersecurity</span>, <span class="highlight">AI innovation</span>, and everything in between!<br>`,
 
-> 💡 I’m always open to exciting collaborations, innovative ideas, or just a good geeky conversation. Let's connect and explore the world of <span class="highlight">cybersecurity</span>, <span class="highlight">AI innovation</span>, and everything in between!<br>
+    skills: `> HTML, CSS, JavaScript, C, C++, Java, Cyber Security, Data Analysis`,
 
-      ',
-    skills: "> HTML, CSS, JavaScript, C, C++, Java, Cyber Security, Data Analysis",
-    projects: 
-      > Projects:
-      <ul>
-        <li>
-          <a href="https://priyanshusinha-a.github.io/home-page/" target="_blank">
-            Home Page - Cybersecurity and Web Development Resources
-          </a>
-        </li>
-        <li>
-          <a href="https://github.com/Priyanshusinha-A/E-PlantShopping-website" target="_blank">
-            E-Plant Shopping - React + Express E-commerce
-          </a>
-        </li>
-        <li>
-          <a href="https://github.com/Priyanshusinha-A/expressBookReviews" target="_blank">
-            Express Book Reviews - Backend Book Management
-          </a>
-        </li>
-      </ul>
-    ,
-    education: 
-      > Education & Certifications
-      - 🎓 <span class="highlight">B.Tech in Computer Science</span> - Ongoing (Black Diamond College of Engineering and Technology)<br>
-      - 🏅 <span class="highlight">DCSC (Drop Certified Security Course)</span> - Completed in 2024<br>
-      - 💻 <span class="highlight">ADCA (Advanced Diploma in Computer Applications) Hons</span> - Outstanding (2023)<br>
-      - 🏫 <span class="highlight">12th in Science</span> - Bagwan Surya Narayan College, Deo (2022)<br>
-      - 🏫 <span class="highlight">10th Standard</span> - Ganghar Public School (2020)<br>
-    ,
-    contact: 
-      > Contact Me
-      Email: <a href="mailto:priyanshusinhatt@gmail.com">priyanshusinhatt@gmail.com</a><br>
-      LinkedIn: <a href="https://www.linkedin.com/in/priyanshu-kumar-6716642b6/" target="_blank">LinkedIn</a><br>
-      GitHub: <a href="https://github.com/Priyanshusinha-A/" target="_blank">GitHub</a>
-    ,
+    projects: `> Projects:<br>
+<ul>
+  <li>
+    <a href="https://priyanshusinha-a.github.io/home-page/" target="_blank">
+      Home Page - Cybersecurity and Web Development Resources
+    </a>
+  </li>
+  <li>
+    <a href="https://github.com/Priyanshusinha-A/E-PlantShopping-website" target="_blank">
+      E-Plant Shopping - React + Express E-commerce
+    </a>
+  </li>
+  <li>
+    <a href="https://github.com/Priyanshusinha-A/expressBookReviews" target="_blank">
+      Express Book Reviews - Backend Book Management
+    </a>
+  </li>
+</ul>`,
+
+    education: `> Education & Certifications<br>
+- 🎓 <span class="highlight">B.Tech in Computer Science</span> - Ongoing (Black Diamond College of Engineering and Technology)<br>
+- 🏅 <span class="highlight">DCSC (Drop Certified Security Course)</span> - Completed in 2024<br>
+- 💻 <span class="highlight">ADCA (Advanced Diploma in Computer Applications) Hons</span> - Outstanding (2023)<br>
+- 🏫 <span class="highlight">12th in Science</span> - Bagwan Surya Narayan College, Deo (2022)<br>
+- 🏫 <span class="highlight">10th Standard</span> - Ganghar Public School (2020)<br>`,
+
+    contact: `> Contact Me<br>
+Email: <a href="mailto:priyanshusinhatt@gmail.com">priyanshusinhatt@gmail.com</a><br>
+LinkedIn: <a href="https://www.linkedin.com/in/priyanshu-kumar-6716642b6/" target="_blank">LinkedIn</a><br>
+GitHub: <a href="https://github.com/Priyanshusinha-A/" target="_blank">GitHub</a>`,
+
     clear: () => {
       output.innerHTML = "";
       reviewFormContainer.style.display = 'none';
       addToTerminal("> Screen cleared. Type a command to continue.");
     },
+
     review: () => {
       reviewFormContainer.style.display = 'block';
       addToTerminal("> Review form opened. Type 'clear' to exit without submitting.");
@@ -97,11 +90,11 @@ document.addEventListener('DOMContentLoaded', function () {
         if (typeof commands[command] === 'function') {
           commands[command]();
         } else {
-          addToTerminal(> ${command});
+          addToTerminal(`> ${command}`);
           addToTerminal(commands[command]);
         }
       } else {
-        addToTerminal(> Command not found: "${command}". Try: about, skills, projects, education, contact, review, clear);
+        addToTerminal(`> Command not found: "${command}". Try: about, skills, projects, education, contact, review, clear`);
       }
     }
   });
@@ -135,7 +128,7 @@ document.addEventListener('DOMContentLoaded', function () {
     })
     .then(response => response.json())
     .then(data => {
-      addToTerminal(> Thank you, ${name}! Your ${experience.toLowerCase()} feedback has been sent successfully.);
+      addToTerminal(`> Thank you, ${name}! Your ${experience.toLowerCase()} feedback has been sent successfully.`);
       reviewFormContainer.style.display = 'none';
       e.target.reset();
     })
