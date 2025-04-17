@@ -1,4 +1,4 @@
- /* Terminal Theme */
+/* ======= General Terminal Theme ======= */
 body {
   background-color: #000;
   color: #00FF00;
@@ -12,13 +12,52 @@ body {
   padding: 20px;
   max-width: 800px;
   margin: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
+/* ======= Header Text (inside terminal) ======= */
 .header {
-  font-weight: bold;
+  text-align: center;
+  color: #00FF00;
+  animation: glow 1.5s ease-in-out infinite alternate;
+  font-size: 1.5rem;
   margin-bottom: 20px;
 }
 
+/* ======= Typing Effect Section (initial welcome) ======= */
+.typing-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  font-size: 2rem;
+}
+
+.typing-header {
+  display: inline;
+  font-family: 'Courier New', Courier, monospace;
+  color: #00FF00;
+}
+
+.glowing {
+  animation: glow 1.5s ease-in-out infinite alternate;
+}
+
+/* ======= Glow Animation Keyframes (shared) ======= */
+@keyframes glow {
+  0% {
+    text-shadow: 0 0 5px #00FF00, 0 0 10px #00FF00, 0 0 15px #00FF00;
+  }
+  100% {
+    text-shadow: 0 0 20px #00FF00, 0 0 30px #00FF00, 0 0 40px #00FF00;
+  }
+}
+
+/* ======= Terminal Lines & Highlights ======= */
 .line {
   margin-bottom: 10px;
 }
@@ -27,24 +66,24 @@ body {
   color: #FFF000;
 }
 
-/* Improved Link Styling */
+/* ======= Link Styling ======= */
 a {
-  color: #FF4500; /* Brighter red-orange */
+  color: #FF4500;
   text-decoration: none;
   font-weight: bold;
   cursor: pointer;
   transition: color 0.3s, text-decoration 0.3s;
-  background-color: rgba(255, 69, 0, 0.1); /* subtle terminal-style glow */
+  background-color: rgba(255, 69, 0, 0.1);
   padding: 2px 4px;
   border-radius: 4px;
 }
 
 a:hover {
-  color: #FF6347; /* Tomato red on hover */
+  color: #FF6347;
   text-decoration: underline;
 }
 
-/* Form Styling */
+/* ======= Form Styling ======= */
 form {
   margin-top: 20px;
 }
@@ -70,3 +109,35 @@ button:hover {
   background-color: #00FF00;
   color: #000;
 }
+
+.suggestion-box {
+  background: #000;
+  border: 1px solid #00FF00;
+  margin-top: 5px;
+  max-height: 150px;
+  overflow-y: auto;
+  color: #00FF00;
+  font-family: 'Courier New', Courier, monospace;
+  position: absolute;
+  width: 100%;
+  z-index: 10;
+}
+
+.suggestion {
+  padding: 5px;
+  cursor: pointer;
+}
+
+.suggestion:hover,
+.suggestion.active {
+  background-color: #00FF00;
+  color: #000;
+}
+
+/* ======= Command Input Styling ======= */
+.command-area {
+  display: flex;
+  position: relative;
+  width: 100%;
+}
+
