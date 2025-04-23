@@ -63,7 +63,7 @@ document.addEventListener('DOMContentLoaded', function () {
       text: `HTML, CSS, JavaScript, C, C++, Java, Cyber Security, Data Analysis`,
     },
     projects: {
-      text: `> <a href="#">Home Page – Cybersecurity & Web Dev Resources</a><br>> <a href="#">E‑Plant Shopping – React + Express E‑commerce</a><br>> <a href="#">Express Book Reviews – Backend Book Management</a>`
+      text: `> <a href="https://priyanshusinha-a.github.io/home-page/">Home Page – Cybersecurity & Web Dev Resources</a><br>> <a href="https://github.com/Priyanshusinha-A/E-PlantShopping-website">E‑Plant Shopping – React + Express E‑commerce</a><br>> <a href="https://github.com/Priyanshusinha-A/expressBookReviews">Express Book Reviews – Backend Book Management</a>`
     },
     education: {
       text: `🎓 B.Tech in Computer Science (Ongoing)<br>🏅 DCSC – Drop Certified Security Course (2024)<br>💻 ADCA Hons – Advanced Diploma in Computer Applications (2023)<br>12th in Science (2022)<br>10th Standard (2020)`
