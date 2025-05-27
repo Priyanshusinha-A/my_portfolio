@@ -194,7 +194,7 @@ document.addEventListener('DOMContentLoaded', function () {
       }
     }, 100);
 
-    fetch('https://my-portfolio-1-9b3k.onrender.com', {
+    fetch('https://my-portfolio-1-9b3k.onrender.com/send-feedback', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ name, experience: exp, comment: comm })
