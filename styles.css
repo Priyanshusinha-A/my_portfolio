@@ -154,18 +154,50 @@ button:hover {
 
 #terminalPopup {
   position: fixed;
-  top: 10%;
+  top: 50%;
   left: 50%;
-  transform: translateX(-50%);
-  width: 90%;
-  max-width: 800px;
+  transform: translate(-50%, -50%) scale(0.95);
+  width: 95%;
+  max-width: 600px;
   background-color: #121212;
   border-radius: 10px;
-  box-shadow: 0 0 20px #00ffae;
+  border: 2px solid #00ff00;
+  box-shadow: 0 0 25px #00ff00;
   z-index: 10000;
   overflow: hidden;
   display: none;
+  animation: glitch-fade-in 0.5s ease-out forwards;
 }
+
+@keyframes glitch-fade-in {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.9) skewX(8deg);
+  }
+  25% {
+    opacity: 0.6;
+    transform: translate(-50%, -50%) scale(1.02) skewX(-6deg);
+  }
+  50% {
+    transform: translate(-50%, -50%) scale(1.01) skewX(3deg);
+  }
+  75% {
+    transform: translate(-50%, -50%) scale(1.005) skewX(-1deg);
+  }
+  100% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1) skewX(0deg);
+  }
+}
+
+#terminalPopup.show {
+  display: block;
+}
+
+#terminalPopup .title-text {
+  animation: glitchColor 0.9s infinite;
+}
+
 
 .popup-body {
   max-height: 70vh;
